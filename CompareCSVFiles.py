@@ -6,7 +6,7 @@ from pathlib import Path
 class CompareCSVFiles:
 
     def __init__(self):
-    """Constructor. Loads the values from Fruits.csv and Vegetables.csv"""
+        """Constructor. Loads the values from Fruits.csv and Vegetables.csv"""
 
         self._vegetable_set = set()
         self._fruit_set = set()
@@ -142,36 +142,36 @@ def parse_arguments(compare_csv_files, input_command):
 def main():
     """ Main program. Ensures that user provides correct csv directory path and processes CSV's
     when user has provided correct command."""
-    
-        _directory = input('Enter the directory location that contains the two CSV files that you want to compare: e.g. c:/csvfolder/\r\n')
+        
+    _directory = input('Enter the directory location that contains the two CSV files that you want to compare: e.g. c:/csvfolder/\r\n')
+        
+    if Path(_directory).exists():
+        csv_files = list(Path(_directory).glob('**/*.csv'))
 
-        if Path(_directory).exists():
-            csv_files = list(Path(_directory).glob('**/*.csv'))
+        print('Number of CSV files found: %d' %len(csv_files))
 
-            print('Number of CSV files found: %d' %len(csv_files))
+        if len(csv_files) == 2:
 
-            if len(csv_files) == 2:
+            compare_csv_files = CompareCSVFiles()
 
-                compare_csv_files = CompareCSVFiles()
+            commands = ('compare_to_fruit_values', 'compare_to_vegetable_values',
+                'show_fruits_vegetables', 'merge')
 
-                commands = ('compare_to_fruit_values', 'compare_to_vegetable_values',
-                    'show_fruits_vegetables', 'merge')
+            print_commands()
+            command = input('Enter the command that you want.\r\n')
 
+            while command not in commands:
+                print('Your entered an invalid command! Try entering another command.')
                 print_commands()
                 command = input('Enter the command that you want.\r\n')
 
-                while command not in commands:
-                    print('Your entered an invalid command! Try entering another command.')
-                    print_commands()
-                    command = input('Enter the command that you want.\r\n')
+            if command in commands:
+                parse_arguments(compare_csv_files, command)
 
-                if command in commands:
-                    parse_arguments(compare_csv_files, command)
-
-            else:
-                print('You need to provide the two csv files in order to compare them!')
         else:
-            print('You need to enter a valid directory!')
+            print('You need to provide the two csv files in order to compare them!')
+    else:
+        print('You need to enter a valid directory!')
 
 if __name__ == '__main__':
     main()
