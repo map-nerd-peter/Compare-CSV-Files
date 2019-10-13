@@ -1,5 +1,4 @@
 # Compare-CSV-Files
-============================
 
 1.  This Python3 program allows for the comparison of two CSV files, and it shows differences and similarities by using union, difference, and Pandas merge functions.
 
