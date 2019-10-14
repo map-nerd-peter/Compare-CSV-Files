@@ -8,7 +8,8 @@
 
 4.  These commands are available:
     
-    ```compare_to_fruit_values
+    ```
+    compare_to_fruit_values
     #Compares the vegetable values to fruit values.
 
     compare_to_vegetable_values
